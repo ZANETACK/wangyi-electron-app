@@ -20,7 +20,7 @@ const actions = {
             commit('SET_BANNER', res.banners || [])
         })
     },
-    getCommentList({commit}, params = {limit: 8, order: 'new'}){
+    getCommentList({commit}, params = {limit: 10}){
         queryHotSongSheet(params).then(({playlists}) =>{
             commit('SET_COMMENT_LIST', playlists)
         })

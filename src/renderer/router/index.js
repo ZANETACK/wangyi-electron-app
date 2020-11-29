@@ -62,6 +62,36 @@ const router = new Router({
             name: 'album',
             component: require('@/views/Album').default,
             meta: { title: "专辑详情"}
+        },
+        {
+            path: '/songsheet',
+            name: 'SongSheet',
+            component: require('@/views/SongSheet').default,
+            meta: { title: "歌单"}
+        },
+        {
+            path: '/radiostation',
+            name: 'RadioStation',
+            component: require('@/views/RadioStation').default,
+            meta: { title: "歌单"}
+        },
+        {
+            path: '/rankinglist',
+            name: 'RankingList',
+            component: require('@/views/RankingList').default,
+            meta: { title: "排行榜"}
+        },
+        {
+            path: '/singer',
+            name: 'Singer',
+            component: require('@/views/Singer').default,
+            meta: { title: "歌手"}
+        },
+        {
+            path: '/newmusic',
+            name: 'NewMusic',
+            component: require('@/views/NewMusic').default,
+            meta: { title: "最新音乐"}
         }
     ]
 });

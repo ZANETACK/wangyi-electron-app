@@ -1,8 +1,6 @@
 <template>
     <div class="song-sheet-item" @click="$emit('click')">
-        <div class="img-box" :title="name">
-            <img :src="src">
-        </div>
+        <img class="img-box" :title="name" :src="src">
         <p class="name ellipsis" :title="name">{{name}}</p>
         <p class="nickname ellipsis">{{nickname}}</p>
     </div>
@@ -18,22 +16,16 @@
 <style scoped lang="less">
     .song-sheet-item{
         display: inline-block;
-        width: calc((100% - 45px) / 4);
+        width: calc((100% - 60px) / 5);
         height: 200px;
         margin: 0 15px 15px 0;
         cursor: pointer;
         border-radius: 4px;
-        &:nth-child(4n + 2){
+        &:nth-child(5n + 3){
             margin-right: 0;
         }
         .img-box{
             width: 100%;
-            height: 150px;
-            overflow: hidden;
-            border: 1px solid #eee;
-            img{
-                width: 100%;
-            }
         }
         .name{
             line-height: 25px;

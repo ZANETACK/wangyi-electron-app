@@ -23,7 +23,7 @@
         font-size: 13px;
         line-height: 32px;
         color: #303030;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         >span:first-child{
             font-size: 16px;
             font-weight: bold;

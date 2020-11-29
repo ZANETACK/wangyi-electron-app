@@ -61,3 +61,11 @@ offset: 偏移数量 , 用于分页 , 如 :( 评论页数 -1)*50, 其中 50 为 
 export function queryHotSongSheet(params = {}) {
     return request.get(`/top/playlist?${formatObjToParams(params)}`)
 }
+/*
+获取歌单详情
+必选参数 : id : 歌单 id
+可选参数 : s : 歌单最近的 s 个收藏者,默认为8
+* */
+export function querySongSheetDetail(id) {
+    return request.get(`/playlist/detail?id=${id}`)
+}
