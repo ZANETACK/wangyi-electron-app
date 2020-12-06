@@ -53,6 +53,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "element-ui": "^2.14.1",
+    "js-cookie": "^2.2.1",
     "less": "^3.12.2",
     "less-loader": "^7.1.0",
     "qs": "^6.9.4",

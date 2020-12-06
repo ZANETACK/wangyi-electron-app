@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie'
+
 export function formatObjToParams(obj) {
     let arr = [];
     for(let key in obj){
@@ -44,14 +46,14 @@ export function formatDate(value, isTime, bool){
     return !isTime ? d : d  + ' ' + [set(date.getHours()), set(date.getMinutes()), set(date.getSeconds())].join(':')
 }
 
-export function setCookie(c_name,value,expire) {
-    let date = new Date();
-    date.setSeconds(date.getSeconds()+expire)
-    document.cookie=c_name+ "="+escape(value)+"; expires="+date.toGMTString()
+export function setCookie(value) {
+    Cookies.set('cookie', value, { expires: 365 })
 }
-
-export function delCookie(c_name){
-    setCookie(c_name, "", -1)
+export function getCookie() {
+    return Cookies.get('cookie')
+}
+export function removeCookie(){
+    Cookies.remove('cookie')
 }
 
 export function setStorage(key, value){

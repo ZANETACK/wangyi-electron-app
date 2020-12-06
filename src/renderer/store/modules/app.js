@@ -17,7 +17,7 @@ const actions = {
                     if (res.code === CODE) {
                         commit('SET_USER', res || {});
                         setStorage('token', res.token);
-                        setCookie('Cookie', res.cookie)
+                        setCookie(res.cookie)
                         resolve()
                     }
                 }).catch(reject)

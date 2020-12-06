@@ -21,7 +21,7 @@
         margin: 0 15px 15px 0;
         cursor: pointer;
         border-radius: 4px;
-        &:nth-child(5n + 3){
+        &:nth-child(5n + 2){
             margin-right: 0;
         }
         .img-box{

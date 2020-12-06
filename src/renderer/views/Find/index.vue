@@ -1,8 +1,9 @@
 <template>
     <div class="Find">
+        <el-button @click="login">登录</el-button>
         <el-tabs class="album-tab" v-model="tabActive" style="text-align: center">
             <el-tab-pane label="个性推荐" name="1">
-                <el-carousel :interval="4000" :loop="true" :autoplay="false" type="card" height="160px">
+                <el-carousel :interval="4000" :loop="true" :autoplay="false" type="card" height="200px">
                     <el-carousel-item v-for="(item, i) in banner" :key="i">
                         <img style="width: 100%;height: 100%" :src="item.imageUrl" @click="bannerClick(item)">
                         <span class="typeTitle" :style="`background: ${item.titleColor}`">{{item.typeTitle}}</span>
@@ -89,6 +90,14 @@
                 querySongSheetDetail(item.id).then(res => {
                     console.log(res)
                 })
+            },
+            login(){
+                this.$store.dispatch('app/login', {
+                    phone: '18144065880',
+                    password: '123456'
+                }).then(() =>{
+                    // this.$router.push('/find')
+                })
             }
         }
     }
@@ -116,5 +125,8 @@
     /deep/.el-tabs__nav-scroll{
         display: flex;
         justify-content: center;
+    }
+    /deep/.el-tab-pane{
+        text-align: left;
     }
 </style>

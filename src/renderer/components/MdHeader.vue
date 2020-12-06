@@ -40,14 +40,6 @@
                 }
             })
             // this.$router.push('/find')
-            
-            //登录
-            // this.$store.dispatch('app/login', {
-            //     phone: '18144065880',
-            //     password: '123456'
-            // }).then(() =>{
-            //     this.$router.push('/find')
-            // })
         },
         methods:{
             onFocus(){
