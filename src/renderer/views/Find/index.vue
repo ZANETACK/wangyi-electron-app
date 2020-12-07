@@ -1,6 +1,5 @@
 <template>
     <div class="Find">
-        <el-button @click="login">登录</el-button>
         <el-tabs class="album-tab" v-model="tabActive" style="text-align: center">
             <el-tab-pane label="个性推荐" name="1">
                 <el-carousel :interval="4000" :loop="true" :autoplay="false" type="card" height="200px">
@@ -10,6 +9,7 @@
                     </el-carousel-item>
                 </el-carousel>
                 <card-header title="推荐歌单"></card-header>
+                <day-view @click="onDaySong"></day-view>
                 <template v-for="item in commendSongList">
                     <song-sheet-item :key="item.id" :src="item.coverImgUrl" :name="item.name" :nickname="item.creator.nickname" @click="songSheetClick(item)" ></song-sheet-item>
                 </template>
@@ -41,6 +41,7 @@
     import {mapGetters} from "vuex";
     import CardHeader from "@/components/CardHeader"
     import SongSheetItem from "@/components/SongSheetItem"
+    import DayView from "@/components/DayView"
     import { ipcRenderer } from 'electron';
     import {querySongSheetDetail} from '@/server'
     import SongSheet from "@/views/SongSheet";//歌单
@@ -48,7 +49,7 @@
     import RankingList from "@/views/RankingList"; //排行榜
     import Singer from "@/views/Singer"; //歌手
     import NewMusic from "@/views/NewMusic"; //歌手
-    
+    import {getCookie} from "@/utils"
     
     export default {
         name: "Find",
@@ -59,7 +60,8 @@
             RadioStation,
             RankingList,
             Singer,
-            NewMusic
+            NewMusic,
+            DayView
         },
         data(){
             return {
@@ -86,18 +88,13 @@
             },
             songSheetClick(item){
                 console.log({...item})
-                console.log(item.id)
-                querySongSheetDetail(item.id).then(res => {
-                    console.log(res)
-                })
+                // querySongSheetDetail(item.id).then(res => {
+                //     console.log(res)
+                // })
             },
-            login(){
-                this.$store.dispatch('app/login', {
-                    phone: '18144065880',
-                    password: '123456'
-                }).then(() =>{
-                    // this.$router.push('/find')
-                })
+            //每日歌曲
+            onDaySong(){
+            
             }
         }
     }

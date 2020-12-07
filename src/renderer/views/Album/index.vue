@@ -22,21 +22,21 @@
     
             <el-tabs class="album-tab" v-model="activeName">
                 <el-tab-pane label="歌曲列表" name="first">
-                    <el-table size="mini" :data="songList" :border="false" stripe  style="width: 100%;">
-                        <el-table-column  prop="key" width="40"></el-table-column>
-                        <el-table-column label="操作" width="100">
-                            <template slot-scope="scope">
-                                <div class="album-tab-f-icon">
-                                    <i class="iconfont icon-zan" style="margin-top: 3px;"></i>
-                                    <i class="iconfont icon-xiazai"></i>
-                                </div>
-                            </template>
-                        </el-table-column>
-                        <el-table-column  prop="name" label="音乐标题"></el-table-column>
-                        <el-table-column prop="artists" label="歌手"></el-table-column>
-                        <el-table-column prop="alName" label="专辑"></el-table-column>
-                        <el-table-column prop="duration" label="时长" width="80"></el-table-column>
-                    </el-table>
+                    <song-table :list="songList" :columns="[
+                        {prop: 'key', width: 40},
+                        {slot: 'operation', width: 100, label: '操作'},
+                        {prop: 'name', label: '音乐标题'},
+                        {prop: 'artists', label: '歌手'},
+                        {prop: 'alName', label: '专辑'},
+                        {prop: 'duration', label: '时长'},
+                    ]">
+                        <template slot="operation" slot-scope="scope">
+                            <div class="album-tab-f-icon">
+                                <i class="iconfont icon-zan" style="margin-top: 3px;"></i>
+                                <i class="iconfont icon-xiazai"></i>
+                            </div>
+                        </template>
+                    </song-table>
                 </el-tab-pane>
                 <el-tab-pane :label="`评论(${commentCount})`" name="second">
                     <div style="margin-top: 15px">
@@ -60,11 +60,13 @@
     import {formatSecond, formatDate, zeroize, formatObjToParams} from "@/utils"
     import CommentItem from '@/components/CommentItem'
     import Empty from '@/components/Empty'
+    import SongTable from '@/components/SongTable'
     export default {
         name: "Album",
         components:{
             CommentItem,
-            Empty
+            Empty,
+            SongTable
         },
         data(){
           return {
@@ -129,10 +131,10 @@
                 this.getCommentList()
             },
             getCommentList(){
-                queryComment(formatObjToParams({
+                queryComment({
                     threadId: this.threadId,
                     ...this.params
-                })).then(({comments, hotComments}) => {
+                }).then(({comments, hotComments}) => {
                     this.comments = comments;
                     if(!this.hotComments || this.hotComments.length === 0){
                         this.hotComments = hotComments
@@ -206,8 +208,5 @@
     }
     /deep/.el-tabs__nav-wrap::after{
         height: 1px;
-    }
-    /deep/.el-table_1_column_4 > div{
-        white-space: nowrap;
     }
 </style>

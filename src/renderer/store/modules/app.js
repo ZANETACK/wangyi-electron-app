@@ -1,7 +1,11 @@
 import { loginPhone, CODE } from "@/server"
-import { formatObjToParams, setStorage, getStorage, setCookie } from "@/utils"
+import {setStorage, setCookie, getCookie } from "@/utils"
 const state = {
-    user: {}
+    user: {
+        isLogin: false
+    },
+    phone: '18144065880',
+    password: '123456'
 }
 
 const mutations = {
@@ -10,19 +14,21 @@ const mutations = {
     }
 }
 const actions = {
-    login({ state, commit }, params) {
+    login({ state, commit }, bool) {
         return new Promise((resolve, reject) => {
-            if (!getStorage('token')) {
-                loginPhone(params).then(res => {
+            if(!getCookie() || bool){
+                const {phone, password} = state;
+                loginPhone({phone, password}).then(res => {
                     if (res.code === CODE) {
-                        commit('SET_USER', res || {});
+                        res['isLogin'] = true;
+                        commit('SET_USER', res || {isLogin: false});
                         setStorage('token', res.token);
-                        setCookie(res.cookie)
+                        setCookie(res.cookie);
                         resolve()
                     }
                 }).catch(reject)
-            } else {
-                reject()
+            }else{
+                resolve()
             }
         })
     }

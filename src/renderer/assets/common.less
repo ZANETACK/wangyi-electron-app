@@ -40,3 +40,32 @@
   color: @font-color-2;
   cursor: pointer
 }
+
+.user-info-number{
+  text-align: center;
+  margin-top: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+  color: @font-color-1;
+  .flex_1{
+    >p:first-child{
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+  .br{
+    border-right: 1px solid #eee;
+  }
+}
+.user-logout{
+  line-height: 50px;
+  text-align: center;
+  color: @font-color-2;
+  cursor: pointer;
+  &:hover{
+    background: rgba(237, 241, 248, 0.62);
+  }
+}
+.user-info-popper{
+  padding: 15px 0  0;
+}

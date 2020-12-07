@@ -179,6 +179,7 @@ button{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    display: inline-block;
 }
 
 /* 多行文本省略 */

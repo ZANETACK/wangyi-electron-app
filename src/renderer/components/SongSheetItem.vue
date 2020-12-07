@@ -17,7 +17,6 @@
     .song-sheet-item{
         display: inline-block;
         width: calc((100% - 60px) / 5);
-        height: 200px;
         margin: 0 15px 15px 0;
         cursor: pointer;
         border-radius: 4px;
@@ -31,6 +30,8 @@
             line-height: 25px;
             color: @font-color-2;
             font-size: 14px;
+            overflow: hidden;
+            width: 100%;
         }
         .nickname{
             line-height: 16px;

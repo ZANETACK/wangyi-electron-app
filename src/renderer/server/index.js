@@ -47,7 +47,7 @@ export function queryComment(params = {}) {
 export function queryCommentResource(params = {}) {
     return request.get(`/recommend/resource?${formatObjToParams(params)}`)
 }
-//每日歌单推荐
+//获取每日推荐歌曲
 export function queryCommentSongs(params = {}) {
     return request.get(`/recommend/songs?${formatObjToParams(params)}`)
 }

@@ -13,7 +13,50 @@
                     <i class="iconfont icon-sousuo3" @click="onSearch"></i>
                 </div>
             </div>
-            <div class="drag"></div>
+            <div class="drag">
+            
+            </div>
+            <div class="user-info">
+                <template v-if="user.isLogin">
+                    
+                    <el-popover
+                            placement="bottom"
+                            width="300"
+                            trigger="click"
+                            popper-class="user-info-popper"
+                    >
+                            <div slot="reference">
+                                <el-avatar class="vertical-middle" shape="circle" size="small" :src="user.profile.avatarUrl"></el-avatar>
+                                <span class="vertical-middle ellipsis" style="width: 100px;" :title="user.profile.nickname">{{user.profile.nickname}}</span>
+                                <i class="el-icon-caret-bottom vertical-middle"></i>
+                            </div>
+                            <p style="padding: 0 15px;">
+                                <el-avatar class="vertical-middle" shape="circle" size="small" :src="user.profile.avatarUrl"></el-avatar>
+                                <span class="vertical-middle ellipsis font-1" :title="user.profile.nickname">{{user.profile.nickname}}</span>
+                            </p>
+                            <div class="user-info-number flexbox">
+                                <div class="flex_1 br">
+                                    <p class="font-1">{{user.profile.eventCount}}</p>
+                                    <p>动态</p>
+                                </div>
+                                <div class="flex_1 br">
+                                    <p class="font-1">{{user.profile.follows}}</p>
+                                    <p>关注</p>
+                                </div>
+                                <div class="flex_1">
+                                    <p class="font-1">{{user.profile.followeds}}</p>
+                                    <p>粉丝</p>
+                                </div>
+                            </div>
+                            <div class="user-logout">
+                                <span>退出登录</span>
+                            </div>
+                    </el-popover>
+                </template>
+                <template v-else>
+                    <span class="user-login" @click="onLogin"> <i v-if="loginLoading" class="el-icon-loading"></i> {{loginLoading ? '登录中...' : '未登录'}}</span>
+                </template>
+            </div>
         </div>
         <div class="win-tool">
             <i class="iconfont icon-zuixiaohua1" @click="mini"></i>
@@ -25,23 +68,37 @@
 
 <script>
     import { ipcRenderer } from 'electron';
+    import {mapGetters} from "vuex"
     export default {
         name: "MdHeader.vue",
         data(){
             return {
                 searchValue: '',
                 isMini: true,
+                loginLoading: false
             }
+        },
+        
+        computed: {
+            ...mapGetters(['user'])
         },
         mounted() {
             window.addEventListener('keyup', (e) => {
                 if(this.focus && e.keyCode === 13){
                     this.onSearch()
                 }
+            });
+            this.$store.dispatch('app/login').then(() => {
+                console.log('user', JSON.parse(JSON.stringify(this.user)))
             })
-            // this.$router.push('/find')
         },
         methods:{
+            onLogin(){
+                this.loginLoading = true;
+                this.$store.dispatch('app/login', true).then(() => {
+                    this.loginLoading = false;
+                })
+            },
             onFocus(){
                 this.focus = true;
             },
@@ -207,6 +264,12 @@
                     cursor: pointer;
                 }
             }
+        }
+        .user-info{
+            color: #fff;
+            padding-right: 10px;
+            font-size: 13px;
+            cursor: pointer;
         }
     }
 </style>
