@@ -1,5 +1,5 @@
-import { loginPhone, CODE } from "@/server"
-import {setStorage, setCookie, getCookie } from "@/utils"
+import { loginPhone, CODE, logout} from "@/server"
+import {setStorage, removeStorage, setCookie, getCookie, removeCookie} from "@/utils"
 const state = {
     user: {
         isLogin: false
@@ -30,6 +30,13 @@ const actions = {
             }else{
                 resolve()
             }
+        })
+    },
+    onLogout({commit}) {
+        logout().then(() => {
+            commit('SET_USER',{isLogin: false});
+            removeCookie();
+            removeStorage('token')
         })
     }
 }

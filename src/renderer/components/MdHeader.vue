@@ -48,13 +48,16 @@
                                     <p>粉丝</p>
                                 </div>
                             </div>
-                            <div class="user-logout">
-                                <span>退出登录</span>
+                            <div class="user-logout" style="border-bottom: 1px solid #eee;">
+                                <i class="iconfont icon-shezhi"></i><span>个人信息设置</span> <i class="el-icon-arrow-right"></i>
+                            </div>
+                            <div class="user-logout" @click="onLogout">
+                                <i class="iconfont icon-tuichudenglu"></i><span>退出登录</span>
                             </div>
                     </el-popover>
                 </template>
                 <template v-else>
-                    <span class="user-login" @click="onLogin"> <i v-if="loginLoading" class="el-icon-loading"></i> {{loginLoading ? '登录中...' : '未登录'}}</span>
+                    <span class="user-login" @click="onLogin"> <i v-if="loginLoading" class="el-icon-loading"></i> {{loginLoading ? '登录中...' : '未登录，现在登录'}}</span>
                 </template>
             </div>
         </div>
@@ -88,11 +91,22 @@
                     this.onSearch()
                 }
             });
-            this.$store.dispatch('app/login').then(() => {
-                console.log('user', JSON.parse(JSON.stringify(this.user)))
-            })
+            if(this.user.isLogin){
+                this.onLogin();
+            }
         },
         methods:{
+            onLogout(){
+                this.$confirm('你要离开我了吗? 谢谢这些日子的陪伴，我会想你的。',{
+                    type: 'warning',
+                    confirmButtonText: '残忍离去',
+                    cancelButtonText: '在想一想'
+                }).then(() => {
+                    this.$store.dispatch('app/onLogout');
+                }).catch(() => {
+                    this.$message.info('谢谢您能留下来！')
+                })
+            },
             onLogin(){
                 this.loginLoading = true;
                 this.$store.dispatch('app/login', true).then(() => {

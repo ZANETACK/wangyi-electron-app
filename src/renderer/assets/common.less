@@ -43,9 +43,9 @@
 
 .user-info-number{
   text-align: center;
-  margin-top: 20px;
+  margin-top: 15px;
   border-bottom: 1px solid #eee;
-  padding-bottom: 20px;
+  padding-bottom: 15px;
   color: @font-color-1;
   .flex_1{
     >p:first-child{
@@ -58,12 +58,27 @@
   }
 }
 .user-logout{
-  line-height: 50px;
-  text-align: center;
+  line-height: 45px;
   color: @font-color-2;
   cursor: pointer;
+  font-size: 13px;
   &:hover{
     background: rgba(237, 241, 248, 0.62);
+  }
+  >.iconfont{
+    color: #666;
+    margin-left: 15px;
+    margin-right: 6px;
+    position: relative;
+    top: 2px;
+  }
+  .el-icon-arrow-right{
+    float: right;
+    position: relative;
+    top: 15px;
+    right: 10px;
+    font-size: 18px;
+    color: #a5a3a3;
   }
 }
 .user-info-popper{
